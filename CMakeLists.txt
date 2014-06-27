@@ -11,23 +11,34 @@ cmake_minimum_required (VERSION 2.6)
 
 project (Boost_Libaries)
 
+message( STATUS "In Boost Libraries..." )
 
 set( MY_BOOST_INCLUDE_DIR ${PROJECT_SOURCE_DIR} )
 
 set( MY_BOOST_LIBS )
 
 foreach( BOOST_LIB ${MY_BOOST_PACKAGES} )
-	message( STATUS "Looking for boost lib: ${BOOST_LIB}" )
+#	message( STATUS "Looking for boost lib: ${BOOST_LIB}" )
 
 	if( ${BOOST_LIB} STREQUAL "system" )
-		#message( STATUS "adding system lib" )
+		#message( STATUS "adding boost system lib" )
 		add_subdirectory( libs/system )
 	elseif( ${BOOST_LIB} STREQUAL "program_options" )
-		#message( STATUS "adding program options lib" )
+		#message( STATUS "adding boost program options lib" )
 		add_subdirectory( libs/program_options )
-	elseif( ${BOOSTLIB} STREQUAL "filesystem" )
-		#message( STATUS adding filesystem lib )
+	elseif( ${BOOST_LIB} STREQUAL "filesystem" )
+		#message( STATUS adding boost filesystem lib )
 		add_subdirectory( libs/filesystem )
+	elseif( ${BOOST_LIB} STREQUAL "chrono" )
+		#message( STATUS adding boost chrono lib )
+		add_subdirectory( libs/chrono )
+	elseif( ${BOOST_LIB} STREQUAL "thread" )
+		#message( STATUS adding boost thread lib )
+		add_subdirectory( libs/thread )
+	else()
+		message( FATAL_ERROR "Looking for boost library that does not exist "
+				     "or does not have a cmake file written yet: " 
+				     "${BOOST_LIB}")
 	endif()
 endforeach( BOOST_LIB )
 
