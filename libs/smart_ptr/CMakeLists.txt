@@ -1,0 +1,14 @@
+cmake_minimum_required (VERSION 2.6)
+
+
+file( GLOB Smart_Ptr_Sources src/*.cpp )
+
+include_directories( ../../ )
+
+add_library(  BOOST_SMART_PTR_LIB ${Smart_Ptr_Sources} )
+
+set( MY_BOOST_LIBS ${MY_BOOST_LIBS} BOOST_SMART_PTR_LIB PARENT_SCOPE )
+
+#set_property(TARGET BOOST_SMART_PTR_LIB APPEND PROPERTY COMPILE_FLAGS ${MY_BOOST_COMPILE_FLAGS} )	
+set_property(TARGET BOOST_SMART_PTR_LIB APPEND PROPERTY COMPILE_DEFINITIONS ${MY_BOOST_DEFINITIONS} )
+
