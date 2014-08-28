@@ -152,7 +152,9 @@ endforeach( FOUND_LIBS )
 #file(GLOB_RECURSE INCLUDE_FILES ${PROJECT_SOURCE_DIR}/boost/*.hpp)
 #install(FILES ${INCLUDE_FILES} DESTINATION include/boost)
 
-install( DIRECTORY boost/ DESTINATION include/boost FILES_MATCHING PATTERN "*hpp" )
+install(FILES boost_mega_pack.h DESTINATION include/boost)
+install( DIRECTORY boost/ DESTINATION include/boost/boost FILES_MATCHING PATTERN "*hpp" PATTERN "*ipp"  )
+
 
 #foreach( FILE ${INCLUDE_FILES} )
 #	message( STATUS "File: ${FILE}" )
