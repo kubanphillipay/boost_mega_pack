@@ -9,9 +9,58 @@ cmake_minimum_required (VERSION 2.6)
 #
 #
 
-project (Boost_Libaries)
+project (BOOST_MEGA_PACK)
 
-message( STATUS "In Boost Libraries..." )
+message( STATUS "In Boost Libraries.test.." )
+
+########### Set cache variables ############
+
+
+set( BMP_USE_STATIC_RUNTIME OFF CACHE BOOL "Use Static runtime" )
+set( BMP_USE_STATIC_LIBS ON CACHE BOOL "Build static libraries" )
+
+set( BMP_SYSTEM ON CACHE BOOL "Use System Library" )
+set( BMP_PROGRAM_OPTIONS ON CACHE BOOL "Use Program Options" )
+set( BMP_FILESYSTEM ON CACHE BOOL "Use FileSystem" )
+set( BMP_CHRONO ON CACHE BOOL "Use Chrono" )
+set( BMP_THREAD ON CACHE BOOL "Use Thread" )
+
+set( MY_BOOST_PACKAGES )
+
+if( BMP_SYSTEM )
+	set( MY_BOOST_PACKAGES ${MY_BOOST_PACKAGES} "system" )
+endif()
+
+if( BMP_PROGRAM_OPTIONS )
+	set( MY_BOOST_PACKAGES ${MY_BOOST_PACKAGES} "program_options" )
+endif()
+
+if( BMP_FILESYSTEM )
+	set( MY_BOOST_PACKAGES ${MY_BOOST_PACKAGES} "filesystem" )
+endif()
+
+if( BMP_CHRONO )
+	set( MY_BOOST_PACKAGES ${MY_BOOST_PACKAGES} "chrono" )
+endif()
+
+if( BMP_THREAD )
+	set( MY_BOOST_PACKAGES ${MY_BOOST_PACKAGES} "thread" )
+endif()
+
+
+
+
+########## set variables ################
+
+
+set( Boost_USE_STATIC_RUNTIME  ${BMP_USE_STATIC_RUNTIME} )
+set( Boost_USE_STATIC_LIBS  ${BMP_USE_STATIC_LIBS} )
+
+
+
+
+
+
 
 ############ Check whether to use static runtime ###########
 if( Boost_USE_STATIC_RUNTIME )
@@ -50,7 +99,7 @@ set( MY_BOOST_INCLUDE_DIR ${PROJECT_SOURCE_DIR} )
 ##################### Find sub packages ################
 #set( MY_BOOST_LIBS )
 foreach( BOOST_LIB ${MY_BOOST_PACKAGES} )
-#	message( STATUS "Looking for boost lib: ${BOOST_LIB}" )
+	message( STATUS "Looking for boost lib: ${BOOST_LIB}" )
 
 	if( ${BOOST_LIB} STREQUAL "system" )
 		#message( STATUS "adding boost system lib" )
@@ -81,67 +130,36 @@ endforeach( BOOST_LIB )
 
 
 ####### #FOR DEBUGGING #####################
-#foreach( FOUND_LIBS ${MY_BOOST_LIBS} )
-#	message( STATUS "Found This LIb: ${FOUND_LIBS}" )
-#endforeach( FOUND_LIBS )
-
-message( STATUS "MY boost libs: ${MY_BOOST_LIBS}" )
+foreach( FOUND_LIBS ${MY_BOOST_LIBS} )
+	message( STATUS "Found This LIb: ${FOUND_LIBS}" )
+endforeach( FOUND_LIBS )
+#
+#message( STATUS "MY boost libs: ${MY_BOOST_LIBS}" )
 #message( STATUS "MY boost include dir: ${MY_BOOST_INCLUDE_DIR}" )
 
 
 
 ######## END DEBUGGING #############
 #set this up for parent scope
-set( MY_BOOST_LIBS ${MY_BOOST_LIBS} PARENT_SCOPE )
-set( MY_BOOST_INCLUDE_DIR ${MY_BOOST_INCLUDE_DIR} PARENT_SCOPE )
-set( MY_BOOST_DEFINITIONS ${MY_BOOST_DEFINITIONS} PARENT_SCOPE )
+#set( MY_BOOST_LIBS ${MY_BOOST_LIBS} PARENT_SCOPE )
+#set( MY_BOOST_INCLUDE_DIR ${MY_BOOST_INCLUDE_DIR} PARENT_SCOPE )
+#set( MY_BOOST_DEFINITIONS ${MY_BOOST_DEFINITIONS} PARENT_SCOPE )
 
 
-##################################
-
-############### Here be dragons
-
-###########################3
-#add_subdirectory( boost_libraries )
-
-#message( STATUS "Boost Include Dir: ${BOOST_INCLUDE_DIR}" )
-#message( STATUS "Boost Definitions: ${BOOST_DEFINITIONS}" )
+##### NEED TO INSTALL #############
 
 
-#set( ALL_LIBS ${BOOST_LIBS} )
+#file(GLOB_RECURSE INCLUDE_FILES ${PROJECT_SOURCE_DIR}/boost/*.hpp)
+#install(FILES ${INCLUDE_FILES} DESTINATION include/boost)
 
-#foreach( BLIB ${BOOST_LIBS} )
-#   message( STATUS "Boost Lib ${BLIB} found" )
-#endforeach(BLIB)
+install( DIRECTORY boost/ DESTINATION include FILES_MATCHING PATTERN "*hpp" )
 
-
-#include_directories(
-#        ${PROJECT_BINARY_DIR}
-#	${BOOST_INCLUDE_DIR}
-#)
+#foreach( FILE ${INCLUDE_FILES} )
+#	message( STATUS "File: ${FILE}" )
+#endforeach( FILE )
 
 
-#add_subdirectory( myexe )
 
-#set ( VERSION_MAJOR 1 )
-#set ( VERSION_MINOR 0 )
-#set ( MEDIA_DIRECTORY "${PROJECT_SOURCE_DIR}/media" )
-
-#configure_file (
-#  "${PROJECT_SOURCE_DIR}/include.h.in"
-#  "${PROJECT_BINARY_DIR}/include.h"
-#)
-
-
-#set( HEADERS myclass.h )
-
-#set( SOURCES tut4.cpp )
-
-
-#message (STATUS ":Done" )
-
-#add_executable( FileDemo ${SOURCES} ${HEADERS} )
-
-#set_property(TARGET FileDemo APPEND PROPERTY COMPILE_DEFINITIONS ${BOOST_DEFINITIONS} )
-
-#target_link_libraries( FileDemo ${ALL_LIBS}  )
+#if( NOT BMP_USE_STATIC_LIBS )
+#	install(TARGETS ${MY_BOOST_LIBS} RUNTIME DESTINATION bin)
+#endif()

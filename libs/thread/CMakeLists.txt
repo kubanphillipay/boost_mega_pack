@@ -35,7 +35,9 @@ add_library(  BOOST_THREAD_LIB ${Thread_Sources} )
 
 set( MY_BOOST_LIBS ${MY_BOOST_LIBS} BOOST_THREAD_LIB PARENT_SCOPE )
 
-
+install(TARGETS 
+ BOOST_THREAD_LIB LIBRARY DESTINATION "lib"
+  ARCHIVE DESTINATION "lib")
 
 
 #######################
