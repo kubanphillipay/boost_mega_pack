@@ -4,12 +4,12 @@ file( GLOB FileSystem_Sources src/*.cpp )
 
 include_directories( ../../ )
 
-add_library(  BOOST_FILESYSTEM_LIB ${FileSystem_Sources} )
+add_library( bmp_filesystem_lib ${FileSystem_Sources} )
 
-set( MY_BOOST_LIBS ${MY_BOOST_LIBS} BOOST_FILESYSTEM_LIB PARENT_SCOPE )
+set( MY_BOOST_LIBS ${MY_BOOST_LIBS} bmp_filesystem_lib PARENT_SCOPE )
 
 install(TARGETS 
- BOOST_FILESYSTEM_LIB LIBRARY DESTINATION "lib"
+ bmp_filesystem_lib LIBRARY DESTINATION "lib"
   ARCHIVE DESTINATION "lib")
 
 #set_property(TARGET BOOST_PROGRAM_OPTIONS_LIB APPEND PROPERTY COMPILE_FLAGS ${MY_BOOST_COMPILE_FLAGS} )	

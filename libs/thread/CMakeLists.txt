@@ -31,12 +31,12 @@ else()
 	message( STATUS "Threads not setup to build dll" )
 endif()
 
-add_library(  BOOST_THREAD_LIB ${Thread_Sources} )
+add_library(  bmp_thread_lib ${Thread_Sources} )
 
-set( MY_BOOST_LIBS ${MY_BOOST_LIBS} BOOST_THREAD_LIB PARENT_SCOPE )
+set( MY_BOOST_LIBS ${MY_BOOST_LIBS} bmp_thread_lib PARENT_SCOPE )
 
 install(TARGETS 
- BOOST_THREAD_LIB LIBRARY DESTINATION "lib"
+ bmp_thread_lib LIBRARY DESTINATION "lib"
   ARCHIVE DESTINATION "lib")
 
 

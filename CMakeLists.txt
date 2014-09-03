@@ -11,7 +11,7 @@ cmake_minimum_required (VERSION 2.6)
 
 project (BOOST_MEGA_PACK)
 
-message( STATUS "In Boost Libraries.test.." )
+#message( STATUS "In Boost Libraries.test.." )
 
 ########### Set cache variables ############
 
@@ -55,9 +55,6 @@ endif()
 
 set( Boost_USE_STATIC_RUNTIME  ${BMP_USE_STATIC_RUNTIME} )
 set( Boost_USE_STATIC_LIBS  ${BMP_USE_STATIC_LIBS} )
-
-
-
 
 
 
@@ -149,19 +146,8 @@ endforeach( FOUND_LIBS )
 ##### NEED TO INSTALL #############
 
 
-#file(GLOB_RECURSE INCLUDE_FILES ${PROJECT_SOURCE_DIR}/boost/*.hpp)
-#install(FILES ${INCLUDE_FILES} DESTINATION include/boost)
-
 install(FILES boost_mega_pack.h DESTINATION include/boost)
 install( DIRECTORY boost/ DESTINATION include/boost/boost FILES_MATCHING PATTERN "*hpp" PATTERN "*ipp"  )
 
 
-#foreach( FILE ${INCLUDE_FILES} )
-#	message( STATUS "File: ${FILE}" )
-#endforeach( FILE )
 
-
-
-#if( NOT BMP_USE_STATIC_LIBS )
-#	install(TARGETS ${MY_BOOST_LIBS} RUNTIME DESTINATION bin)
-#endif()

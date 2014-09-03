@@ -6,12 +6,16 @@ file( GLOB System_Sources src/*.cpp )
 
 include_directories( ../../ )
 
-set( MY_BOOST_LIBS ${MY_BOOST_LIBS} BOOST_SYSTEM_LIB PARENT_SCOPE )
 
-add_library(  BOOST_SYSTEM_LIB ${System_Sources} )
+
+add_library(  bmp_system_lib ${System_Sources} )
+
+
+set( MY_BOOST_LIBS ${MY_BOOST_LIBS} bmp_system_lib PARENT_SCOPE )
+
 
 install(TARGETS 
- BOOST_SYSTEM_LIB LIBRARY DESTINATION "lib"
+ bmp_system_lib LIBRARY DESTINATION "lib"
   ARCHIVE DESTINATION "lib")
 
 #set_property(TARGET BOOST_SYSTEM_LIB APPEND PROPERTY COMPILE_FLAGS ${MY_BOOST_COMPILE_FLAGS} )	
