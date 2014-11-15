@@ -147,7 +147,7 @@ endforeach( FOUND_LIBS )
 
 
 install(FILES boost_mega_pack.h DESTINATION include/boost)
-install( DIRECTORY boost/ DESTINATION include/boost/ FILES_MATCHING PATTERN "*hpp" PATTERN "*ipp"  )
+install( DIRECTORY boost/ DESTINATION include/boost FILES_MATCHING PATTERN "*hpp" PATTERN "*ipp"  )
 
 
 
